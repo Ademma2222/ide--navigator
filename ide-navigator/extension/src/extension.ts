@@ -31,7 +31,8 @@ function renderWebview(
     panel.webview.html = template
         .replace(/__CSP_SOURCE__/g, panel.webview.cspSource)
         .replace(/__CSS_URI__/g, mediaUri(cssFile).toString())
-        .replace(/__JS_URI__/g, mediaUri(jsFile).toString());
+        .replace(/__JS_URI__/g, mediaUri(jsFile).toString())
+        .replace(/__VIS_URI__/g, mediaUri('vis-network.min.js').toString());
 }
 
 let client: LanguageClient;
