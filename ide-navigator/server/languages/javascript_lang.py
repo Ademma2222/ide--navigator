@@ -14,7 +14,6 @@ class JavaScriptLanguage(BaseLanguage):
         return Parser(Language(tsjs.language()))
 
     def _extract_imports(self, root_node, uri: str) -> dict[str, tuple[Path | None, str]]:
-        ""
         current_path = self._uri_to_path(uri)
         current_dir = current_path.parent
         result: dict[str, tuple[Path | None, str]] = {}
@@ -71,7 +70,6 @@ class JavaScriptLanguage(BaseLanguage):
         return result
 
     def _resolve_js_module(self, base_dir: Path, module_path: str) -> Path | None:
-        ""
         if not module_path.startswith("."):
             return None
 
@@ -156,7 +154,6 @@ class JavaScriptLanguage(BaseLanguage):
         return symbols
 
     def _get_func_def_name(self, node) -> str | None:
-        ""
         result = super()._get_func_def_name(node)
         if result:
             return result

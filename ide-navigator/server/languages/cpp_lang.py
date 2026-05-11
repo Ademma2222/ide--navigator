@@ -59,7 +59,6 @@ class CppLanguage(BaseLanguage):
         return symbols
 
     def _get_func_def_name(self, node) -> str | None:
-        ""
         if node.type == "function_definition":
             name_node = self._func_name(node)
             if name_node:
@@ -67,7 +66,6 @@ class CppLanguage(BaseLanguage):
         return None
 
     def _func_name(self, func_node):
-        ""
         declarator = func_node.child_by_field_name("declarator")
         if declarator and declarator.type == "function_declarator":
             inner = declarator.child_by_field_name("declarator")

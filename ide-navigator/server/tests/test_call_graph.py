@@ -1,4 +1,3 @@
-""
 from languages.python_lang import PythonLanguage
 from languages.java_lang import JavaLanguage
 from languages.base import BaseLanguage
@@ -51,7 +50,6 @@ def test_python_call_graph_class_containment():
     assert ("Service.start", "Service.init") in call_pairs
 
 def test_python_call_graph_node_locations():
-    ""
     src = (
         "def leaf():\n"
         "    return 1\n"
@@ -75,7 +73,6 @@ def test_python_call_graph_node_locations():
     assert by_name["open"]["line"] == 4
 
 def test_python_call_graph_decorated_methods():
-    ""
     src = (
         "class StateMachine:\n"
         "    def __init__(self):\n"
@@ -103,7 +100,6 @@ def test_python_call_graph_decorated_methods():
     assert ("StateMachine", "StateMachine.factory") in contain_pairs
 
 def test_python_call_graph_cyclomatic_complexity():
-    ""
     src = (
         "def trivial():\n"
         "    return 1\n"
@@ -139,7 +135,6 @@ def test_python_call_graph_cyclomatic_complexity():
     assert by_name["loopy"]["complexity"] == 5
 
 def test_java_call_graph_cyclomatic_complexity():
-    ""
     src = (
         "class App {\n"
         "    int simple() { return 1; }\n"
@@ -164,7 +159,6 @@ def test_java_call_graph_cyclomatic_complexity():
     assert by_id["App.complex"]["complexity"] == 6
 
 def test_python_call_graph_edge_kinds():
-    ""
     src = (
         "class A:\n"
         "    def a(self):\n"
@@ -185,7 +179,6 @@ def test_call_graph_empty_source():
     assert graph == {"nodes": [], "edges": []}
 
 def test_call_graph_type_whitelist():
-    ""
     src = "def foo(): pass\nclass Bar: pass\n"
     lang = PythonLanguage()
     graph = lang.get_call_graph(src)
@@ -195,7 +188,6 @@ def test_call_graph_type_whitelist():
         assert node["type"] in allowed, f"unexpected type: {node['type']!r}"
 
 def test_call_graph_label_length_limit():
-    ""
     long_name = "x" * (BaseLanguage._GRAPH_MAX_LABEL_LEN + 50)
     src = f"def {long_name}(): pass\n"
     lang = PythonLanguage()

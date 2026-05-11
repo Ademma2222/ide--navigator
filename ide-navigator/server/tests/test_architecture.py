@@ -1,4 +1,3 @@
-""
 import os
 import tempfile
 from pathlib import Path
@@ -12,14 +11,12 @@ from languages.base import BaseLanguage
 from languages.python_lang import PythonLanguage
 
 def test_base_inherits_all_mixins():
-    ""
     mro = BaseLanguage.__mro__
     for mixin in (ParseCacheMixin, DefinitionMixin, ReferencesMixin,
                   HoverMixin, CallGraphMixin):
         assert mixin in mro, f"{mixin.__name__} пропал из MRO BaseLanguage"
 
 def test_parse_cache_max_override_via_base():
-    ""
     original = BaseLanguage._PARSE_CACHE_MAX
     try:
         BaseLanguage._PARSE_CACHE_MAX = 7
@@ -37,14 +34,12 @@ def test_is_path_within_workspace_accepts_inside():
         assert DefinitionMixin._is_path_within_workspace(target, [root_path])
 
 def test_is_path_within_workspace_rejects_outside():
-    ""
     with tempfile.TemporaryDirectory() as root, tempfile.TemporaryDirectory() as other:
         outside = Path(other) / "secret.py"
         outside.write_text("x = 1")
         assert not DefinitionMixin._is_path_within_workspace(outside, [Path(root)])
 
 def test_is_path_within_workspace_rejects_traversal():
-    ""
     with tempfile.TemporaryDirectory() as root, tempfile.TemporaryDirectory() as other:
         outside = Path(other) / "secret.py"
         outside.write_text("x = 1")
@@ -53,7 +48,6 @@ def test_is_path_within_workspace_rejects_traversal():
         assert not DefinitionMixin._is_path_within_workspace(traversal, [root_path])
 
 def test_is_path_within_workspace_empty_roots_allows():
-    ""
     with tempfile.TemporaryDirectory() as tmp:
         target = Path(tmp) / "file.py"
         target.write_text("x = 1")

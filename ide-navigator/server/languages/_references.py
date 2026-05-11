@@ -1,4 +1,3 @@
-""
 from lsprotocol import types
 
 class ReferencesMixin:
@@ -6,7 +5,6 @@ class ReferencesMixin:
         self, source: str, line: int, character: int, include_declaration: bool = True,
         uri: str | None = None,
     ) -> list[types.Range]:
-        ""
         tree = self._parse(source, uri)
 
         node = tree.root_node.descendant_for_point_range(
@@ -31,14 +29,12 @@ class ReferencesMixin:
     def _collect_identifiers(
         self, node, name: str, result: list[types.Range],
     ) -> None:
-        ""
         if "identifier" in node.type and node.text.decode("utf-8") == name:
             result.append(self._to_range(node))
         for child in node.children:
             self._collect_identifiers(child, name, result)
 
     def count_identifiers_by_name(self, source: str, uri: str | None = None) -> dict[str, int]:
-        ""
         tree = self._parse(source, uri)
         counts: dict[str, int] = {}
         stack = [tree.root_node]
@@ -55,7 +51,6 @@ class ReferencesMixin:
         self, source: str, line: int, character: int, include_declaration: bool = True,
         uri: str | None = None,
     ) -> dict | None:
-        ""
         tree = self._parse(source, uri)
 
         node = tree.root_node.descendant_for_point_range(

@@ -4,7 +4,6 @@ from lsprotocol import types
 from .javascript_lang import JavaScriptLanguage
 
 class TypeScriptLanguage(JavaScriptLanguage):
-    ""
 
     LANGUAGE_ID = "typescript"
 

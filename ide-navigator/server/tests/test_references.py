@@ -1,4 +1,3 @@
-""
 from languages.python_lang import PythonLanguage
 from languages.java_lang import JavaLanguage
 

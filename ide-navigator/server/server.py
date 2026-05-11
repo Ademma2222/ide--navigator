@@ -41,26 +41,22 @@ LANGUAGE_MAP = {
 }
 
 def get_language(uri: str):
-    ""
     path = urlparse(uri).path
     ext = os.path.splitext(path)[1].lower()
     return LANGUAGE_MAP.get(ext)
 
 def _folder_uri_to_path(folder_uri: str) -> Path:
-    ""
     folder_path = unquote(urlparse(folder_uri).path)
     if os.name == "nt" and folder_path.startswith("/"):
         folder_path = folder_path[1:]
     return Path(folder_path)
 
 def _iter_folder_uris(folders) -> list[str]:
-    ""
     if not folders:
         return []
     return list(folders.keys()) if isinstance(folders, dict) else [f.uri for f in folders]
 
 def _get_workspace_roots(ls: LanguageServer) -> list[Path]:
-    ""
     roots: list[Path] = []
     for folder_uri in _iter_folder_uris(ls.workspace.folders):
         root = _folder_uri_to_path(folder_uri)
@@ -76,7 +72,6 @@ _LOG_LEVELS = {
 }
 
 def _apply_settings(opts: dict) -> None:
-    ""
     if not isinstance(opts, dict):
         return
 
@@ -96,7 +91,6 @@ def _apply_settings(opts: dict) -> None:
 
 @server.feature(types.INITIALIZE)
 def on_initialize(ls: LanguageServer, params: types.InitializeParams):
-    ""
     opts = params.initialization_options
     if isinstance(opts, dict):
         _apply_settings(opts)
@@ -114,7 +108,6 @@ def document_symbol(
     ls: LanguageServer,
     params: types.DocumentSymbolParams,
 ) -> list[types.DocumentSymbol]:
-    ""
     uri = params.text_document.uri
     lang = get_language(uri)
 
@@ -137,7 +130,6 @@ def definition(
     ls: LanguageServer,
     params: types.DefinitionParams,
 ) -> types.Location | None:
-    ""
     uri = params.text_document.uri
     lang = get_language(uri)
 
@@ -176,7 +168,6 @@ def references(
     ls: LanguageServer,
     params: types.ReferenceParams,
 ) -> list[types.Location]:
-    ""
     uri = params.text_document.uri
     lang = get_language(uri)
 
@@ -201,7 +192,6 @@ def hover(
     ls: LanguageServer,
     params: types.HoverParams,
 ) -> types.Hover | None:
-    ""
     uri = params.text_document.uri
     lang = get_language(uri)
 
@@ -224,7 +214,6 @@ def code_lens(
     ls: LanguageServer,
     params: types.CodeLensParams,
 ) -> list[types.CodeLens]:
-    ""
     uri = params.text_document.uri
     lang = get_language(uri)
 
@@ -251,7 +240,6 @@ def _collect_code_lenses(
     uri: str,
     result: list[types.CodeLens],
 ) -> None:
-    ""
     for s in symbols:
         line = s.selection_range.start.line
         character = s.selection_range.start.character
@@ -276,7 +264,6 @@ SUPPORTED_EXTENSIONS = set(LANGUAGE_MAP.keys())
 def _flatten_symbols(
     symbols: list[types.DocumentSymbol], uri: str, container: str = "",
 ) -> list[types.SymbolInformation]:
-    ""
     result = []
     for s in symbols:
         result.append(types.SymbolInformation(
@@ -290,7 +277,6 @@ def _flatten_symbols(
     return result
 
 def _scan_workspace_files(folders) -> list[Path]:
-    ""
     files = []
     for folder_uri in _iter_folder_uris(folders):
         root = _folder_uri_to_path(folder_uri)
@@ -309,7 +295,6 @@ def workspace_symbol(
     ls: LanguageServer,
     params: types.WorkspaceSymbolParams,
 ) -> list[types.SymbolInformation]:
-    ""
     query = params.query.lower()
     all_symbols: list[types.SymbolInformation] = []
 
@@ -344,13 +329,11 @@ def workspace_symbol(
     return all_symbols
 
 def _unwrap_args(args: tuple) -> list:
-    ""
     if len(args) == 1 and isinstance(args[0], (list, tuple)):
         return list(args[0])
     return list(args)
 
 def _validate_position_args(args: tuple) -> tuple[str, int, int, bool] | None:
-    ""
     flat = _unwrap_args(args)
     if len(flat) < 3:
         return None
@@ -365,7 +348,6 @@ def _validate_position_args(args: tuple) -> tuple[str, int, int, bool] | None:
     return uri, line, character, include_decl
 
 def _validate_uri_arg(args: tuple) -> str | None:
-    ""
     flat = _unwrap_args(args)
     if not flat:
         return None
@@ -376,7 +358,6 @@ def _validate_uri_arg(args: tuple) -> str | None:
 
 @server.command("ide-navigator.references")
 def references_command(ls: LanguageServer, *args):
-    ""
     logger.debug(f"References command, args={args}")
 
     validated = _validate_position_args(args)
@@ -403,7 +384,6 @@ def references_command(ls: LanguageServer, *args):
 
 @server.command("ide-navigator.callGraph")
 def call_graph_command(ls: LanguageServer, *args):
-    ""
     logger.debug(f"Call graph command, args={args}")
     empty = {"nodes": [], "edges": []}
 

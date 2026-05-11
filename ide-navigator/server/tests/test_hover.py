@@ -1,4 +1,3 @@
-""
 from lsprotocol import types
 
 from languages.python_lang import PythonLanguage
@@ -72,7 +71,6 @@ def test_typescript_hover_language_id():
     assert "```typescript" in hover.contents.value
 
 def test_python_hover_complexity_toplevel():
-    ""
     src = (
         "def branching(x):\n"
         "    if x > 0:\n"
@@ -90,7 +88,6 @@ def test_python_hover_complexity_toplevel():
     assert "complexity 3" in md
 
 def test_python_hover_complexity_method():
-    ""
     src = (
         "class Service:\n"
         "    def process(self, items):\n"

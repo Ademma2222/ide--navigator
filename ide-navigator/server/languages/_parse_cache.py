@@ -1,4 +1,3 @@
-""
 import logging
 import time
 from collections import OrderedDict
@@ -17,7 +16,6 @@ class ParseCacheMixin:
         self._uri_tree_cache: OrderedDict[str, object] = OrderedDict()
 
     def _parse(self, source: str, uri: str | None = None):
-        ""
         cached = self._parse_cache.get(source)
         if cached is not None:
             self._parse_cache.move_to_end(source)
@@ -50,7 +48,6 @@ class ParseCacheMixin:
         return tree
 
     def _to_range(self, node) -> types.Range:
-        ""
         return types.Range(
             start=types.Position(
                 line=node.start_point[0],

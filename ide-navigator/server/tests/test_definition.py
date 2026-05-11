@@ -1,4 +1,3 @@
-""
 from lsprotocol import types
 
 from languages.python_lang import PythonLanguage
@@ -7,7 +6,6 @@ from languages.go_lang import GoLanguage
 from languages.typescript_lang import TypeScriptLanguage
 
 def _find_position(source: str, token: str, occurrence: int = 0) -> tuple[int, int]:
-    ""
     seen = 0
     for line_idx, line in enumerate(source.splitlines()):
         start = 0
@@ -52,7 +50,6 @@ def test_python_definition_class():
     assert result.start.line == 0
 
 def test_python_definition_not_found():
-    ""
     src = "x = 1 + 2\n"
     lang = PythonLanguage()
     result = lang.find_definition(src, 0, 6)

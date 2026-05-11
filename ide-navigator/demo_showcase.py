@@ -1,4 +1,3 @@
-""
 
 def fib(n):
     if n < 2:
@@ -16,15 +15,12 @@ def pong(n):
     return 1 + ping(n - 1)
 
 def unused_helper():
-    ""
     return 42
 
 def debug_print(msg):
-    ""
     print(f"[DEBUG] {msg}")
 
 class StateMachine:
-    ""
 
     def __init__(self):
         self._state = "idle"
@@ -32,16 +28,13 @@ class StateMachine:
 
     @property
     def current_state(self):
-        ""
         return self._state
 
     @staticmethod
     def factory():
-        ""
         return StateMachine()
 
     def transition(self, event, payload):
-        ""
         if event == "start":
             self._state = "running"
         elif event == "stop":
@@ -74,7 +67,6 @@ class Calculator:
         return a - b
 
     def run(self, x, y):
-        ""
         total = self.add(x, y)
         delta = self.sub(x, y)
         self.history.append((total, delta))

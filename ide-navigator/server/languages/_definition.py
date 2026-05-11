@@ -1,4 +1,3 @@
-""
 import logging
 import os
 from pathlib import Path
@@ -9,7 +8,6 @@ logger = logging.getLogger(__name__)
 
 class DefinitionMixin:
     def find_definition(self, source: str, line: int, character: int, uri: str | None = None) -> types.Range | None:
-        ""
         tree = self._parse(source, uri)
 
         node = tree.root_node.descendant_for_point_range(
@@ -31,7 +29,6 @@ class DefinitionMixin:
         language_map: dict,
         workspace_roots: list[Path] | None = None,
     ) -> types.Location | None:
-        ""
         tree = self._parse(source, uri)
         node = tree.root_node.descendant_for_point_range(
             (line, character), (line, character)
@@ -74,7 +71,6 @@ class DefinitionMixin:
     def _is_path_within_workspace(
         target: Path, workspace_roots: list[Path] | None,
     ) -> bool:
-        ""
         if not workspace_roots:
             return True
         try:
@@ -90,12 +86,10 @@ class DefinitionMixin:
         return False
 
     def _extract_imports(self, root_node, uri: str) -> dict[str, tuple[Path | None, str]]:
-        ""
         return {}
 
     @staticmethod
     def _uri_to_path(uri: str) -> Path:
-        ""
         parsed = urlparse(uri).path
         path = unquote(parsed)
         if os.name == "nt" and path.startswith("/"):
@@ -105,7 +99,6 @@ class DefinitionMixin:
     def _find_symbol_by_name(
         self, symbols: list[types.DocumentSymbol], name: str,
     ) -> types.DocumentSymbol | None:
-        ""
         for s in symbols:
             if s.name == name:
                 return s
@@ -118,7 +111,6 @@ class DefinitionMixin:
     def _find_symbol_fqn(
         self, symbols: list[types.DocumentSymbol], name: str, prefix: str = "",
     ) -> str | None:
-        ""
         for s in symbols:
             fqn = f"{prefix}.{s.name}" if prefix else s.name
             if s.name == name:

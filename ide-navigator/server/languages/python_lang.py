@@ -12,7 +12,6 @@ class PythonLanguage(BaseLanguage):
         return Parser(Language(tspython.language()))
 
     def _extract_imports(self, root_node, uri: str) -> dict[str, tuple[Path | None, str]]:
-        ""
         current_path = self._uri_to_path(uri)
         current_dir = current_path.parent
         result: dict[str, tuple[Path | None, str]] = {}
@@ -75,7 +74,6 @@ class PythonLanguage(BaseLanguage):
 
     @staticmethod
     def _resolve_python_module(base_dir: Path, parts: list[str]) -> Path | None:
-        ""
         if not parts:
             init = base_dir / "__init__.py"
             return init if init.exists() else None

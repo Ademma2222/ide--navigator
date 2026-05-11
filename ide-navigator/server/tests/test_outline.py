@@ -1,4 +1,3 @@
-""
 import pytest
 from lsprotocol import types
 
@@ -10,7 +9,6 @@ from languages.javascript_lang import JavaScriptLanguage
 from languages.typescript_lang import TypeScriptLanguage
 
 def _names(symbols) -> set[str]:
-    ""
     out = set()
     for s in symbols:
         out.add(s.name)
@@ -215,7 +213,6 @@ def test_empty_source_returns_empty():
     assert lang.get_symbols("") == []
 
 def test_broken_python_does_not_crash():
-    ""
     lang = PythonLanguage()
     src = "def broken(\nclass X\n    pass"
     symbols = lang.get_symbols(src)

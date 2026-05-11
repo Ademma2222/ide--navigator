@@ -1,4 +1,3 @@
-""
 from languages.python_lang import PythonLanguage
 
 def test_parse_cache_returns_same_tree():
@@ -17,7 +16,6 @@ def test_parse_cache_different_sources():
     assert tree_a is not tree_b
 
 def test_parse_cache_lru_eviction():
-    ""
     lang = PythonLanguage()
     lang._parse_cache.clear()
 
@@ -30,7 +28,6 @@ def test_parse_cache_lru_eviction():
     assert sources[-1] in lang._parse_cache
 
 def test_get_symbols_uses_cache():
-    ""
     lang = PythonLanguage()
     lang._parse_cache.clear()
 

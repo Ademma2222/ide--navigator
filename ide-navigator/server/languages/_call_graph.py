@@ -1,4 +1,3 @@
-""
 from lsprotocol import types
 
 class CallGraphMixin:
@@ -31,7 +30,6 @@ class CallGraphMixin:
     })
 
     def get_call_graph(self, source: str, uri: str | None = None) -> dict:
-        ""
         tree = self._parse(source, uri)
         root = tree.root_node
 
@@ -102,7 +100,6 @@ class CallGraphMixin:
         self, symbols: list[types.DocumentSymbol], edges: set[tuple[str, str]],
         prefix: str = "",
     ) -> None:
-        ""
         for s in symbols:
             fqn = f"{prefix}.{s.name}" if prefix else s.name
             if s.kind in (types.SymbolKind.Class, types.SymbolKind.Interface,
@@ -119,7 +116,6 @@ class CallGraphMixin:
         self, symbols: list[types.DocumentSymbol], result: dict[str, dict],
         prefix: str = "",
     ) -> None:
-        ""
         for s in symbols:
             fqn = f"{prefix}.{s.name}" if prefix else s.name
             kind_str = self._GRAPH_KIND_MAP.get(s.kind)
@@ -136,7 +132,6 @@ class CallGraphMixin:
         self, symbols: list[types.DocumentSymbol], result: set[str],
         prefix: str = "",
     ) -> None:
-        ""
         for s in symbols:
             fqn = f"{prefix}.{s.name}" if prefix else s.name
             if s.kind in (types.SymbolKind.Function, types.SymbolKind.Method,
@@ -147,7 +142,6 @@ class CallGraphMixin:
 
     def _collect_complexity(self, root, result: dict[str, int],
                             scope: str = "") -> None:
-        ""
         stack: list[tuple] = [(root, scope)]
         while stack:
             node, cur_scope = stack.pop()
@@ -167,7 +161,6 @@ class CallGraphMixin:
                     stack.append((child, child_scope))
 
     def _compute_complexity(self, func_node) -> int:
-        ""
         count = 1
         stack = [func_node]
         while stack:
@@ -184,7 +177,6 @@ class CallGraphMixin:
         short_to_fqn: dict[str, list[str]] | None = None,
         scope: str = "",
     ) -> None:
-        ""
         func_name = self._get_func_def_name(node)
         cls_name = self._get_class_def_name(node) if func_name is None else None
 
@@ -209,7 +201,6 @@ class CallGraphMixin:
             self._walk_calls(child, current_func, known, edges, short_to_fqn, scope)
 
     def _get_class_def_name(self, node) -> str | None:
-        ""
         if node.type in (
             "class_definition", "class_declaration",
             "interface_declaration", "struct_specifier",
@@ -221,7 +212,6 @@ class CallGraphMixin:
         return None
 
     def _get_func_def_name(self, node) -> str | None:
-        ""
         if node.type in (
             "function_definition", "function_declaration",
             "method_definition", "method_declaration",
@@ -233,7 +223,6 @@ class CallGraphMixin:
         return None
 
     def _find_func_node_at(self, root, line: int, character: int):
-        ""
         node = root.descendant_for_point_range((line, character), (line, character))
         while node is not None:
             if self._get_func_def_name(node) is not None:
@@ -242,7 +231,6 @@ class CallGraphMixin:
         return None
 
     def _get_call_name(self, node) -> str | None:
-        ""
         if node.type not in ("call", "call_expression", "method_invocation"):
             return None
 

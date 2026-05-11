@@ -1,4 +1,3 @@
-""
 from lsprotocol import types
 
 class HoverMixin:
@@ -17,7 +16,6 @@ class HoverMixin:
     }
 
     def get_hover(self, source: str, line: int, character: int, uri: str | None = None) -> types.Hover | None:
-        ""
         tree = self._parse(source, uri)
 
         node = tree.root_node.descendant_for_point_range(
