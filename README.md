@@ -57,7 +57,7 @@ Python Language Server (pygls)
 
 ### Быстрый старт
 
-1. Скачайте `.vsix` для своей платформы со [страницы релизов](https://github.com/Ademma2222/ide-navigator/releases/latest):
+1. Скачайте `.vsix` для своей платформы со [страницы релизов](https://github.com/Ademma2222/IDENAVIGATOR/releases/latest):
    - **Windows x64** — `ide-navigator-win32-x64-<версия>.vsix`
    - **macOS Apple Silicon** — `ide-navigator-darwin-arm64-<версия>.vsix`
 2. Установите одной командой:
@@ -78,7 +78,7 @@ Python Language Server (pygls)
 ### Сборка из исходников (для разработчиков)
 
 ```bash
-git clone https://github.com/Ademma2222/ide-navigator.git
+git clone https://github.com/Ademma2222/IDENAVIGATOR.git
 cd ide-navigator
 
 # Python-сервер
@@ -146,6 +146,3 @@ ide-navigator/
 - [highlight.js](https://highlightjs.org/) — подсветка синтаксиса в WebView-панелях
 - [vscode-languageclient](https://github.com/microsoft/vscode-languageserver-node) — LSP-клиент для VS Code
 
----
-
-*Курсовая работа. Национальный исследовательский университет «Высшая школа экономики», факультет компьютерных наук, 2026.*
