@@ -546,6 +546,7 @@
 
         const usedTypes = new Set(raw.nodes.map(n => n.type));
         const legendEl = document.getElementById('legend');
+        legendEl.replaceChildren();
         const typeLabels = {
             'function': 'Function', 'method': 'Method', 'constructor': 'Constructor',
             'class': 'Class', 'interface': 'Interface', 'struct': 'Struct'
