@@ -62,19 +62,6 @@
         selectedNode: null,
     };
 
-    const history = { back: [], forward: [] };
-    function historyPush(nodeId) {
-        if (nodeId == null) return;
-        if (history.back.length && history.back[history.back.length - 1] === nodeId) return;
-        history.back.push(nodeId);
-        history.forward.length = 0;
-        updateHistoryButtons();
-    }
-    function updateHistoryButtons() {
-        document.getElementById('historyBack').disabled = history.back.length < 2;
-        document.getElementById('historyFwd').disabled  = history.forward.length === 0;
-    }
-
     function computeUnused(nodes, edges) {
         const incoming = {};
         nodes.forEach(n => { incoming[n.id] = 0; });
@@ -367,7 +354,7 @@
         minX -= pad; minY -= pad; maxX += pad; maxY += pad;
         const w = Math.max(1, maxX - minX), h = Math.max(1, maxY - minY);
         const parts = [
-            '<svg xmlns="http:
+            '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="' + minX + ' ' + minY + ' ' + w + ' ' + h + '">',
             '<rect x="' + minX + '" y="' + minY + '" width="' + w + '" height="' + h + '" fill="#191919"/>',
             '<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#888"/></marker></defs>'
         ];
@@ -451,7 +438,6 @@
             }
             const nodeId = params.nodes[0];
             state.selectedNode = nodeId;
-            historyPush(nodeId);
             const src = params.event && params.event.srcEvent;
             const withMod = src && (src.ctrlKey || src.metaKey || src.shiftKey || src.altKey);
             if (withMod) {
@@ -496,36 +482,6 @@
         document.getElementById('markCycles').addEventListener('change', (e) => {
             state.markCycles = e.target.checked;
             rerender();
-        });
-
-        function focusFromHistory(nodeId) {
-            state.selectedNode = nodeId;
-            network.selectNodes([nodeId], false);
-            try { network.focus(nodeId, { scale: 1.1, animation: { duration: 300, easingFunction: 'easeInOutQuad' } }); } catch (_) {}
-            updateHistoryButtons();
-        }
-        document.getElementById('historyBack').addEventListener('click', () => {
-            if (history.back.length < 2) return;
-            const cur = history.back.pop();
-            history.forward.push(cur);
-            const prev = history.back[history.back.length - 1];
-            focusFromHistory(prev);
-        });
-        document.getElementById('historyFwd').addEventListener('click', () => {
-            if (history.forward.length === 0) return;
-            const next = history.forward.pop();
-            history.back.push(next);
-            focusFromHistory(next);
-        });
-        document.addEventListener('keydown', (ev) => {
-            if (!ev.altKey) return;
-            if (ev.key === 'ArrowLeft') {
-                ev.preventDefault();
-                document.getElementById('historyBack').click();
-            } else if (ev.key === 'ArrowRight') {
-                ev.preventDefault();
-                document.getElementById('historyFwd').click();
-            }
         });
 
         document.getElementById('exportFmt').addEventListener('change', (ev) => {

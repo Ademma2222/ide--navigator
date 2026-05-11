@@ -32,7 +32,9 @@ function renderWebview(
         .replace(/__CSP_SOURCE__/g, panel.webview.cspSource)
         .replace(/__CSS_URI__/g, mediaUri(cssFile).toString())
         .replace(/__JS_URI__/g, mediaUri(jsFile).toString())
-        .replace(/__VIS_URI__/g, mediaUri('vis-network.min.js').toString());
+        .replace(/__VIS_URI__/g, mediaUri('vis-network.min.js').toString())
+        .replace(/__HL_JS_URI__/g, mediaUri('highlight.min.js').toString())
+        .replace(/__HL_CSS_URI__/g, mediaUri('atom-one-dark.min.css').toString());
 }
 
 let client: LanguageClient;

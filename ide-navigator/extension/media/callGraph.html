@@ -3,15 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Security-Policy"
-          content="default-src 'none'; script-src __CSP_SOURCE__; style-src __CSP_SOURCE__ 'unsafe-inline'; img-src __CSP_SOURCE__ data:;">
+          content="default-src 'none'; script-src __CSP_SOURCE__; style-src __CSP_SOURCE__ 'unsafe-inline'; font-src __CSP_SOURCE__ data:; img-src __CSP_SOURCE__ data:;">
     <link rel="stylesheet" href="__CSS_URI__">
 </head>
 <body>
     <div id="toolbar">
         <span class="group">
-            <button id="historyBack" title="Back (Alt+←)" disabled>←</button>
-            <button id="historyFwd" title="Forward (Alt+→)" disabled>→</button>
-            <div class="divider"></div>
             <input id="search" type="text" placeholder="Search…" spellcheck="false">
         </span>
         <div class="divider"></div>
