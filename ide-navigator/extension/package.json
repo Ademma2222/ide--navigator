@@ -1,0 +1,91 @@
+{
+  "name": "ide-navigator",
+  "displayName": "IDE Navigator",
+  "description": "Multi-language static-analysis navigation: Outline, Go to Definition, References, Hover, Workspace Symbols, Call Graph. Zero setup — bundled LSP server.",
+  "version": "1.0.0",
+  "publisher": "hvn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ademma2222/ide-navigator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ademma2222/ide-navigator/issues"
+  },
+  "homepage": "https://github.com/Ademma2222/ide-navigator#readme",
+  "keywords": [
+    "lsp",
+    "tree-sitter",
+    "navigation",
+    "call-graph",
+    "python",
+    "java",
+    "cpp",
+    "go",
+    "javascript",
+    "typescript"
+  ],
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Programming Languages", "Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ide-navigator.showCallGraph",
+        "title": "IDE Navigator: Show Call Graph"
+      },
+      {
+        "command": "ide-navigator.showReferences",
+        "title": "IDE Navigator: Show References"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "ide-navigator.showReferences",
+        "key": "shift+f12",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "IDE Navigator",
+      "properties": {
+        "ideNavigator.logLevel": {
+          "type": "string",
+          "enum": ["debug", "info", "warning", "error"],
+          "default": "info",
+          "description": "Уровень логирования Python-сервера."
+        },
+        "ideNavigator.cacheSize": {
+          "type": "integer",
+          "default": 32,
+          "minimum": 1,
+          "maximum": 256,
+          "description": "Максимальное количество AST-деревьев в кэше парсера."
+        },
+        "ideNavigator.enableCallGraph": {
+          "type": "boolean",
+          "default": true,
+          "description": "Включить команду построения графа вызовов."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile",
+    "package:win32-x64": "vsce package --target win32-x64",
+    "package:darwin-arm64": "vsce package --target darwin-arm64"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.4.0"
+  }
+}
