@@ -2,6 +2,10 @@
 
 Расширение для Visual Studio Code, которое добавляет навигацию по исходному коду на основе статического анализа AST. Поддерживает шесть языков сразу: Python, Java, C++, Go, JavaScript, TypeScript.
 
+<p align="center">
+  <img src="https://media1.tenor.com/m/mxhNvaln24cAAAAC/pox3d.gif" width="600"/>
+</p>
+
 ## Возможности
 
 | Функция | Описание |
