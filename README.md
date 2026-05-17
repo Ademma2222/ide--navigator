@@ -4,6 +4,18 @@
   <img src="https://media1.tenor.com/m/mxhNvaln24cAAAAC/pox3d.gif" width="600"/>
 </p>
 
+## Демо
+
+<p align="center">
+  <a href="https://youtu.be/Rx4OKa3KbXw">
+    <img src="https://img.youtube.com/vi/Rx4OKa3KbXw/maxresdefault.jpg" width="600" alt="IDE Navigator — обзор расширения"/>
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://youtu.be/Rx4OKa3KbXw">▶ Смотреть обзор на YouTube</a>
+</p>
+
 ## Возможности
 
 | Функция | Описание |
