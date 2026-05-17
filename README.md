@@ -30,7 +30,7 @@
 
 ## Установка
 
-Скачайте `.vsix` для своей платформы со [страницы релизов](https://github.com/Ademma2222/ide_navigator/releases/latest):
+Скачайте `.vsix` для своей платформы со [страницы релизов](https://github.com/Ademma2222/ide--navigator/releases/latest):
 
 - **Windows x64** — `ide-navigator-win32-x64-<версия>.vsix`
 - **macOS Apple Silicon** — `ide-navigator-darwin-arm64-<версия>.vsix`
